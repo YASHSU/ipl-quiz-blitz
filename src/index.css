@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 33% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -13,16 +13,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 224 76.3% 48%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 260 50% 55%;
+    --secondary-foreground: 210 40% 98%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 45 100% 50%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -30,55 +30,49 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 224 76.3% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 224 71% 4%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 224 76.3% 48%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 260 50% 55%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 224 76.3% 48%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -97,5 +91,72 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .quiz-container {
+    @apply max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8;
+  }
+
+  .gradient-btn {
+    @apply bg-gradient-to-r from-primary to-secondary text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+  
+  .option-btn {
+    @apply relative w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md;
+  }
+  
+  .option-btn.correct {
+    @apply border-green-500 bg-green-50;
+  }
+  
+  .option-btn.incorrect {
+    @apply border-red-500 bg-red-50;
+  }
+  
+  .option-btn.selected {
+    @apply border-primary bg-primary/10;
+  }
+  
+  .timer-ring {
+    @apply h-16 w-16 rounded-full flex items-center justify-center relative;
+  }
+  
+  .timer-ring::before {
+    content: '';
+    @apply absolute inset-0 rounded-full animate-pulse-ring border-4 border-primary/30;
+  }
+  
+  .cricket-ball {
+    @apply w-8 h-8 rounded-full bg-gradient-to-r from-ipl-orange to-red-600 animate-cricket-ball-spin;
+  }
+  
+  .cricket-ball::before {
+    content: '';
+    @apply absolute top-1/2 left-0 w-full h-[2px] bg-white/60 -translate-y-1/2;
+  }
+
+  .confetti {
+    @apply pointer-events-none fixed inset-0 z-50 opacity-0;
+    animation: confetti-fade-in 0.3s ease forwards;
+  }
+}
+
+@keyframes confetti-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
   }
 }
